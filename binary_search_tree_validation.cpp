@@ -1,4 +1,4 @@
-The Node struct is defined as follows:
+/*
    struct Node {
       int data;
       Node* left;
@@ -6,7 +6,29 @@ The Node struct is defined as follows:
    }
 */
 
-   bool checkBST(Node* root)
+#include<limits.h>
+
+   /* second try - O(n) time and space complexity and only one recursive function */
+   bool checkBST(Node* root) /* improved*/
+   {
+       return checkBST_improved(root, INT_MIN, INT_MAX);
+   }
+
+   bool checkBST_improved(Node* root, int min, int max)
+   {
+       if (root == NULL)
+           return true;
+       
+       if (root->data < min || root->data > max)
+           return false;
+       
+       return (checkBST_improved(root->left, min, root->data-1) && checkBST_improved(root->right, root->data+1, max));
+   }
+
+
+
+   /* first try - O(n) space and time complexity */
+   bool checkBST_old(Node* root)
    {
        std::vector<int> v;
        inOrderTraversal(root, v);
@@ -28,4 +50,3 @@ The Node struct is defined as follows:
        if (root->right != NULL)
            inOrderTraversal(root->right, v);
    }
-
