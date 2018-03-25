@@ -2,7 +2,24 @@
 
 using namespace std;
 
+//version avoiding string conversions
 int findDigits(int n) {
+    
+    int divisors = 0;
+    int d = n;
+    while (d>0)
+    {
+        int divisor = d%10;
+        d /= 10;
+        
+        if(divisor!=0 && n%divisor==0)
+            divisors++;
+    }
+    
+    return divisors;
+}
+
+int findDigitsOld(int n) {
     
     string s = std::to_string(n);
     int divisors = 0;
