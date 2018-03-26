@@ -2,6 +2,22 @@
 
 using namespace std;
 
+//recursive version
+int viralAdvertising(int n, int received)
+{
+    if (n==0)
+        return 0;
+    
+    return floor(received/2) //how many liked
+        + viralAdvertising(n-1, floor(received/2)*3); //how many will like from those who will receive
+}
+
+int viralAdvertisingRec(int n)
+{
+    return viralAdvertising(n, 5);
+}
+
+//iterative version
 int viralAdvertising(int n) {
     int received = 5;
     int liked = 0;
@@ -21,7 +37,7 @@ int viralAdvertising(int n) {
 int main() {
     int n;
     cin >> n;
-    int result = viralAdvertising(n);
+    int result = viralAdvertisingRec(n);
     cout << result << endl;
     return 0;
 }
