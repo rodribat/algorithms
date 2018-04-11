@@ -2,8 +2,35 @@
 
 using namespace std;
 
+//linear solution
 vector <int> icecreamParlor(int m, vector <int> arr) {
     
+    vector<int> ret;
+    map<int, int> freq; //the frequency of elements with price i
+    
+    for (int i=0; i<arr.size(); i++)
+        freq[arr[i]]++;
+    
+    int i = 0;
+    for (i=0; i<arr.size(); i++)
+        if ((m-arr[i] != arr[i] && freq[m-arr[i]] >= 1) || (m-arr[i] == arr[i] && freq[m-arr[i]] >= 2))
+        {
+            ret.push_back(i+1);
+            break;
+        }
+    
+    for (int j=0; j<arr.size(); j++)
+        if (j!=i && arr[j] == m-arr[i])
+        {
+            ret.push_back(j+1);
+            break;
+        }
+    
+    return ret;
+}
+
+//quadratic solution
+vector <int> icecreamParlorOld(int m, vector <int> arr) {    
     vector<int> ret;
     for (int i=0; i<arr.size(); i++)
         for (int j=i; j<arr.size(); j++)
