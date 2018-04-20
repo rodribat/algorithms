@@ -2,7 +2,20 @@
 
 using namespace std;
 
-vector <int> stonesPD(int n, int a, int b) {
+/*the right one*/
+vector<int> stonesBeautiful(int n, int a, int b) {
+
+    int stones = n-1;
+    set<int> s;
+    
+    for (int i=0; i<=stones; i++)
+        s.insert(i*a + (stones-i)*b);
+    
+    return vector<int>(s.begin(), s.end());
+}
+
+/*segmentation fault due matrix size*/
+vector<int> stonesPD(int n, int a, int b) {
 
     int lines = pow(2, n-1);
     int cols = n-1;
@@ -51,6 +64,7 @@ vector <int> stonesPD(int n, int a, int b) {
     return ret;
 }
 
+/*expires due timeout*/
 void stonesRec(int n, int a, int b, int curr, set<int>& s)
 {
     if (n==1)
@@ -65,7 +79,7 @@ void stonesRec(int n, int a, int b, int curr, set<int>& s)
     return;
 }
 
-vector <int> stones(int n, int a, int b) {
+vector<int> stones(int n, int a, int b) {
 
     set<int> s;
     stonesRec(n, a, b, 0, s);
@@ -84,7 +98,7 @@ int main() {
         cin >> a;
         int b;
         cin >> b;
-        vector <int> result = stonesPD(n, a, b);
+        vector <int> result = stonesBeautiful(n, a, b);
         for (ssize_t i = 0; i < result.size(); i++) {
             cout << result[i] << (i != result.size() - 1 ? " " : "");
         }
