@@ -1,5 +1,6 @@
 
-
+# Convert roman numerals into integer equivalent
+# Additionally provide validation checking for invalid roman numerals (e.g. IM)
 
 import re
 
